@@ -1,0 +1,32 @@
+.sign-up{
+    height: 91%;
+    width: 100%; 
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    background-color: #eee;
+    position: absolute;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    right: 53px;
+}
+
+.forgot-password {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 15px;
+}
+
+.muted {
+    color: #7C8285;
+}
+
+.signup-names{
+    display: flex;
+    justify-content: space-between;
+}

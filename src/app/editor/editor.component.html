@@ -1,0 +1,90 @@
+<div class="editor">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a href="javascript:void(0)" (click)="format('bold')"><span
+          class="fa fa-bold editor-header-icons clickable"></span></a>
+      <a href="javascript:void(0)" (click)="format('italic')"><span
+          class="fa fa-italic editor-header-icons clickable"></span></a>
+      <a href="javascript:void(0)" (click)="format('underline')"><span
+          class="fa fa-underline editor-header-icons clickable"></span></a>
+      <a href="javascript:void(0)" (click)="format('strikethrough')"><span
+          class="fa fa-strikethrough editor-header-icons clickable"></span></a>
+      <a href="javascript:void(0)" (click)="format('insertunorderedlist')"><span
+          class="fa fa-list-ul editor-header-icons clickable"></span></a>
+      <a href="javascript:void(0)" (click)="format('insertorderedlist')"><span
+          class="fa fa-list-ol editor-header-icons clickable"></span></a>
+          
+  
+  
+      <div class="dropdown editor-header-icons">
+        <span class="btn btn-default dropdown-toggle fa fa-{{selectedJustify.icon}}" id="dropdownMenuButton" type="button"
+          title="Select Log-Level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </span>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li *ngFor="let justify of justifys; let i = index"><a href="javascript: void(0);"
+              (click)="format(justify.value)" class="dropdown-item fa fa-{{justify.icon}}"></a></li>
+        </ul>
+      </div>
+  
+      <div class="dropdown ">
+        <span class="btn btn-default dropdown-toggle" id="dropdownMenuButton" type="button" title="Select Log-Level"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{selectedFont}}
+        </span>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li *ngFor="let font of fontNames; let i = index"><a href="javascript: void(0);"
+          (click)="format('fontName',font.name)" class="dropdown-item" style="font-family:{{font.name}}">{{font.name}}</a></li>
+        </ul>
+      </div>
+  
+  
+      <div class="dropdown ">
+        <span class="btn btn-default dropdown-toggle" id="dropdownMenuButton" type="button" title="Select Log-Level"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{selectedFontSize.name}}
+        </span>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li *ngFor="let fontSize of fontSizes; let i = index"><a href="javascript: void(0);"
+              (click)="format('fontSize',fontSize)" class="dropdown-item">{{fontSize.name}}</a></li>
+        </ul>
+      </div>
+  
+      <a href="javascript:void(0)" (click)="setUrl()"><span
+          class="fa fa-link editor-header-icons clickable"></span></a>
+  
+          
+      <a href="javascript:void(0)" (click)="format('bold')" data-toggle="modal" 
+      data-target="#exampleModal"><span
+          class="fa fa-picture-o editor-header-icons clickable"></span></a>
+  
+  
+      <a href="javascript:void(0)" (click)="format('bold')"><span
+          class="fa fa-undo editor-header-icons clickable"></span></a>
+      <a href="javascript:void(0)" (click)="format('bold')"><span
+          class="fa fa-repeat editor-header-icons clickable"></span></a>
+    </nav>
+    <div id="textArea" class="editor-textArea" contenteditable="true">
+    </div>
+  </div>
+  
+  
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Insert Image</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="file" id="insertImage" name="myImage" accept="image/*" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" (click)="insertImage()"class="btn btn-primary" data-dismiss="modal">Insert</button>
+        </div>
+      </div>
+    </div>
+  </div>

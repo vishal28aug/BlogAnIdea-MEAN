@@ -1,0 +1,22 @@
+.header {
+    background-color: #25343B !important;
+    flex-grow: 1;
+    color: white;
+    justify-content: normal;
+}
+
+.navbar-nav{
+    display: flex;
+    flex-direction: row;
+}
+
+.auth{
+    display: flex;
+    right: 0;
+    position: absolute;
+}
+
+.logged-user{
+    right: 30px;
+    position: absolute;
+}

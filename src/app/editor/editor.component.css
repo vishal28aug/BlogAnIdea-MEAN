@@ -1,0 +1,23 @@
+.editor{
+    margin:5px
+}
+
+.editor-header-icons{
+    margin-left: 25px;
+    color: black;
+}
+
+.editor-header-undo-redo{
+    right: 0;
+    margin-right: 25px;
+}
+
+.editor-textArea{
+    height: 500px;
+    border: 1px solid;
+    border-color: #a8a8a82d!important;
+}
+
+.dropdown-menu {
+    min-width: auto!important;
+}

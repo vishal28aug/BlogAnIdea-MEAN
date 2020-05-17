@@ -1,7 +1,8 @@
 <nav class="navbar navbar-dark header">
     <a class="navbar-brand" routerLink="/blogs">BlogAnIdea</a>
-    <a class="nav-item nav-link active" routerLink="/blogs">Home </a>
-    <a  *ngIf="isAuth" class="nav-item nav-link active" routerLink="/createBlog">Home </a>
+    <a class="nav-item nav-link active" routerLink="/blogs">Blogs</a>
+    <a *ngIf="isAuth" class="nav-item nav-link active" routerLink="/blogs">My Blogs </a>
+    
     <div *ngIf="!isAuth;else loggedInUser" class="auth">
         <a class="nav-item nav-link" routerLink="/login">Log-In</a>
         <a class="nav-item nav-link" routerLink="/register">Sign Up</a>
@@ -9,12 +10,12 @@
     <ng-template #loggedInUser>
         <div class="nav-item dropdown logged-user">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              vishalsharma25sept@gmail.com
+              {{loggedUser}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Edit Profile</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">LogOut</a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="onLogout()">LogOut</a>
             </div>
         </div>
     </ng-template>

@@ -1,0 +1,7 @@
+.add-button{
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    font-size: 70px;
+    color: #007bff;
+}

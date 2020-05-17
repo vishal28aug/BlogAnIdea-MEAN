@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'login',
@@ -9,7 +10,7 @@ import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   details: FormGroup
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, public _authService:AuthService) { }
 
   ngOnInit(): void {
   }
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   ngAfterContentInit() {
     try {
       this.details = this._formBuilder.group({
-        email: ['', [Validators.required]],
+        userId: ['', [Validators.required]],
         password: ['', [Validators.required]],
       })
     } catch (err) {
@@ -25,6 +26,9 @@ export class LoginComponent implements OnInit {
   }
 
   logInUser(){
-    console.log(this.details);
+    if(this.details.invalid){
+      return;
+    }
+    this._authService.logIn(this.details.value);
   }
 }

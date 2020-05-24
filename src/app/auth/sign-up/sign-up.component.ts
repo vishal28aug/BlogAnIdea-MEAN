@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
+
 import { AuthService } from '../auth.service';
+
 
 
 @Component({
@@ -9,6 +11,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+
+  profilePicture: String;
 
   details: FormGroup
   constructor(private _formBuilder: FormBuilder, public _authService: AuthService) { }
@@ -23,8 +27,22 @@ export class SignUpComponent implements OnInit {
         lastName:['',[Validators.required]],
         userId: ['', [Validators.required]],
         password: ['', [Validators.required]],
-      })
+        profilePicture: ['',[Validators.required]]
+      });
     } catch (err) {
+    }
+  }
+
+  onImagePicked(event: Event){
+    const file = (event.target as HTMLInputElement).files[0];
+     // just checking if it is an image, ignore if you want
+     if (!file.type.startsWith('image')) {
+      this.details.get('profilePicture').setErrors({ required: true });
+      this.details.get('profilePicture').updateValueAndValidity();
+    } else {
+      //using the actual Blob/file object instead of the data-url
+      this.details.patchValue({profilePicture:file});
+      this.details.get('profilePicture').updateValueAndValidity();
     }
   }
 

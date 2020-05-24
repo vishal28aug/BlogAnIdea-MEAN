@@ -38,8 +38,15 @@ export class AuthService {
 
   //register a user
   registerUser(userDetails) {
-    const { firstName, lastName, userId, password } = userDetails;
-    this._http.post("http://localhost:3000/api/v1/auth/register", { firstName, lastName, userId, password })
+    const { firstName, lastName, userId, password, profilePicture } = userDetails;
+    const newUserData = new FormData();
+    newUserData.append("firstName",firstName);
+    newUserData.append("lastName",lastName);
+    newUserData.append("userId",userId);
+    newUserData.append("password",password);
+    newUserData.append("profilePicture",profilePicture);
+
+    this._http.post("http://localhost:3000/api/v1/auth/register", newUserData )
       .subscribe(res => {
         this._router.navigate(['/login']);
       })
@@ -87,7 +94,7 @@ export class AuthService {
   autoLogin() {
     const userData = this.getAuthData();
     if (userData?.token) {
-      this.loggedUser = userData.loggedUser;
+      this.loggedUser = JSON.parse(userData.loggedUser);
       this.isAuthenticated = true;
       this.authStatusListener.next(true);
     }
@@ -110,8 +117,9 @@ export class AuthService {
   private getLoggedUser() {
     this._http.get("http://localhost:3000/api/v1/auth/me")
       .subscribe(res => {
-        this.loggedUser = res['data'].firstName;
-        if (this.loggedUser) this.saveAuthData('loggedUser', this.loggedUser)
+        console.log(res);
+        this.loggedUser = res['data'];
+        if (this.loggedUser) this.saveAuthData('loggedUser', JSON.stringify(this.loggedUser))
       })
   }
 }

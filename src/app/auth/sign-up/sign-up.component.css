@@ -30,3 +30,12 @@
     display: flex;
     justify-content: space-between;
 }
+
+.profilePicture {
+    height: 60px;
+    margin: 1rem;
+}
+
+.profilePicture img {
+    height: 100%;
+}

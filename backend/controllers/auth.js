@@ -8,6 +8,9 @@ const User = require('../models/User');
 // @route POST /api/v1/auth/register
 // @acess Public
 exports.register = asyncHandler(async (req, res, next) => {
+
+  const url = req.protocol + '://'+req.get("host");
+  profilePicturePath = url +"/images/"+ req.file.filename;
   const { firstName, lastName, userId, password } = req.body;
 
   //Create user
@@ -15,10 +18,15 @@ exports.register = asyncHandler(async (req, res, next) => {
     firstName,
     lastName,
     userId,
-    password
+    password,
+    profilePicturePath
   });
-
-  sendTokenResponse(user, 200, res);
+  
+  res.status(200).json({
+    sucess: true,
+    data: user
+  });
+  //sendTokenResponse(user, 200, res);
 });
 
 // @desc Login user

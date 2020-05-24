@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema({
         minlength: 6,
         select: false
     },
+    profilePicturePath:{
+        type:String,
+        required:[true,'Please add a profile picture']
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
     createdAt: {

@@ -74,6 +74,9 @@ router.get('/blogs', renderBlogAnIdea);
 router.get('/create', renderBlogAnIdea);
 router.get('/myblogs', renderBlogAnIdea);
 
+//images
+app.use("/images", express.static(path.join("backend/images")));
+
 //Mount routers
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/auth/users',users);

@@ -20,3 +20,11 @@
     right: 30px;
     position: absolute;
 }
+
+.avatar {
+    vertical-align: middle;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }

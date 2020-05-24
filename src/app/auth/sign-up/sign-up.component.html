@@ -14,6 +14,13 @@
     <div class="form-group">
       <input type="password" class="form-control" placeholder="password" formControlName="password">
     </div>
+    <div>
+      <span>Profile photo: &nbsp;&nbsp;</span>
+      <input type="file" accept=".png, .jpeg, .jpg" (change)="onImagePicked($event)">
+    </div>
+    <div  class="profilePicture" *ngIf="profilePicture !== '' && profilePicture && details.get('profilePicture').valid">
+      <img [src]="profilePicture" [alt]="details.value.userId">
+    </div>
     <div class="forgot-password">
       <a href="javascrpt.void(0)" routerLink="/login">Login</a>
     </div>

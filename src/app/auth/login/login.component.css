@@ -2,7 +2,7 @@
     height: 91%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-content: center;
     background-color: #eee;
     position: absolute;
@@ -14,6 +14,7 @@
     justify-content: center;
     height: 100%;
     width: 100%;
+    right: 53px;
 }
 
 .forgot-password {

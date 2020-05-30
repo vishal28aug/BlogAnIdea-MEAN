@@ -15,7 +15,9 @@ export class AddBlogButtonComponent implements OnInit {
 
   ngOnInit() {    
     this._router.events.subscribe((res) => { 
-      this.isEditor = this._router.url === '/login' || this._router.url === '/register' ? false : true;
+      this.isEditor = this._router.url === '/login' || 
+      this._router.url === '/register' || 
+      this._router.url === '/create' ? false : true;
   })
   }
 

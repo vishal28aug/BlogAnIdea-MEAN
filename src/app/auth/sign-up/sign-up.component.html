@@ -16,7 +16,7 @@
     </div>
     <div>
       <span>Profile photo: &nbsp;&nbsp;</span>
-      <input type="file" accept=".png, .jpeg, .jpg" (change)="onImagePicked($event)">
+      <input type="file" accept="image/*" (change)="onImagePicked($event)">
     </div>
     <div  class="profilePicture" *ngIf="profilePicture !== '' && profilePicture && details.get('profilePicture').valid">
       <img [src]="profilePicture" [alt]="details.value.userId">

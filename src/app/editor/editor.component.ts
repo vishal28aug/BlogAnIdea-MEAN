@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { EditorService } from './editor.service';
+import {AuthService} from '../auth/auth.service'
+
 @Component({
   selector: 'editor',
   templateUrl: './editor.component.html',
@@ -7,11 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditorComponent implements OnInit {
 
+  isShowAddCoverImage = true;
+
   selectedFontSize;
 
   selectedJustify;
 
   selectedFont;
+
+  content;
+
+  uploadedContent = [];
+
+  uploadLoader = false;
+
+  selectedImage = null;
+
+  selectedCoverImage;
+
+  editor(event){
+console.log(event)
+console.log(event.target.innerHTML)
+  }
 
   fontSizes = [
     { id: 1, name: "8 pt" },
@@ -40,7 +60,7 @@ export class EditorComponent implements OnInit {
     { id: 7, name: "Verdana" },
   ];
 
-  constructor() {
+  constructor(public _editorService:EditorService, public _authService:AuthService) {
 
   }
 
@@ -83,12 +103,51 @@ export class EditorComponent implements OnInit {
     document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank" title="'+url+'">' + selectedText + '</a>');
   }
 
-  insertImage(){
-    var id = "rand" + Math.random();
-    let img = document.getElementById("insertImage")['files'][0].name; 
-    if(img){
-          document.execCommand('insertHTML', false, '<img src="' + img + '" id="' + id + '">');
+  async getAllUploadContetnt(){
+    this.uploadLoader = true;
+    let { userId } = this._authService.getUser();
+    let response = await this._editorService.getUploadFiles(userId)
+    if(response){
+      let data = response['data']
+      data.forEach(x => {
+        let file = {filePath:'', fileName:''};
+        file.filePath = x.filePath;
+        file.fileName = x.fileName;
+        this.uploadedContent.unshift(file)
+      });     
+      this.uploadLoader = false;
+    }    
+    }
+
+  async uploadFile(file){
+    if(file[0]){
+      let { userId } = this._authService.getUser();
+      let response = await this._editorService.uploadFiles(userId, file[0]);
+      if(response){
+        let file = {filePath:response['data']['filePath'], fileName:response['data']['fileName']};
+        this.uploadedContent.unshift(file);
+      }
+    }
+    
+  }
+
+  selectCoverImage(file){
+    if(file[0]){
+      this.selectedCoverImage = file[0] 
     }
   }
 
-}
+    selectImage(file){
+      if(this.selectedImage && this.selectedImage.filePath === file.filePath){
+        this.selectedImage = null;
+        return;
+      }
+      this.selectedImage = file;
+    }
+
+    deleteFile(file){
+      console.log(this.selectedImage)
+    }
+
+  }
+

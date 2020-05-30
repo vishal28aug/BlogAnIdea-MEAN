@@ -22,6 +22,7 @@ connectDB();
 //Route files
 const auth = require('./backend/routes/auth');
 const users = require('./backend/routes/user');
+const upload = require('./backend/routes/uploads');
 
 const app = express();
 const router = express.Router();
@@ -76,10 +77,12 @@ router.get('/myblogs', renderBlogAnIdea);
 
 //images
 app.use("/images", express.static(path.join("backend/images")));
+app.use("/uploads", express.static(path.join("backend/uploads")));
 
 //Mount routers
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/auth/users',users);
+app.use('/api/v1/upload/file',upload);
 
 const PORT = process.env.PORT || 5000;
 

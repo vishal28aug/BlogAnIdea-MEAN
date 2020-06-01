@@ -10,11 +10,11 @@ exports.upload = asyncHandler(async (req, res, next) => {
   const fileName = req.file.originalname;
   const url = req.protocol + '://' + req.get("host");
   filePath = url + "/uploads/" + req.file.filename;
-  const { userId } = req.body;
+  const user = req.user.id;
 
   //save path of image
   const upload = await Upload.create({
-    userId,
+    user,
     filePath,
     fileName
   });
@@ -29,9 +29,9 @@ exports.upload = asyncHandler(async (req, res, next) => {
 // @route GET /api/v1/upload/file
 // @acess Private
 exports.getAllUpload = asyncHandler(async (req, res, next) => {
-  const userId = req.query.userId;
+  const user = req.query.user;
 
-  const uploadData = await Upload.find({ userId: userId });
+  const uploadData = await Upload.find({ user: user });
 
   res.status(200).json({ sucess: true, data: uploadData });
 

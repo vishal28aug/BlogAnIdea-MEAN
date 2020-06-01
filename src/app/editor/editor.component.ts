@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EditorService } from './editor.service';
-import {AuthService} from '../auth/auth.service'
+import { AuthService } from '../auth/auth.service'
+import { FormBuilder, Validators } from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'editor',
@@ -18,7 +20,7 @@ export class EditorComponent implements OnInit {
 
   selectedFont;
 
-  content;
+  
 
   uploadedContent = [];
 
@@ -28,10 +30,21 @@ export class EditorComponent implements OnInit {
 
   selectedCoverImage;
 
-  editor(event){
-console.log(event)
-console.log(event.target.innerHTML)
-  }
+  isBold = false;
+
+  isItalic = false;
+
+  isUnderline = false;
+
+  isStrikeThrough = false;
+
+  isUl = false;
+
+  isOl = false;
+
+  content = ""
+
+  form;
 
   fontSizes = [
     { id: 1, name: "8 pt" },
@@ -60,7 +73,11 @@ console.log(event.target.innerHTML)
     { id: 7, name: "Verdana" },
   ];
 
-  constructor(public _editorService:EditorService, public _authService:AuthService) {
+  constructor(
+    public _editorService: EditorService, 
+    public _authService: AuthService,
+    private _formBuilder: FormBuilder
+    ) {
 
   }
 
@@ -68,7 +85,20 @@ console.log(event.target.innerHTML)
     this.selectedFontSize = this.fontSizes[1];
     this.selectedJustify = this.justifys[1];
     this.selectedFont = this.fontNames[1].name;
-  }
+    
+    }
+
+    ngAfterContentInit(){
+    this.form =  this._formBuilder.group({
+        coverImagePath: ['', [Validators.required]],
+        title: ['', [Validators.required]],
+        content: ['', [Validators.required]],
+    })
+    }
+
+    editor(event) {
+
+    }
 
   format(command, value = null) {
 
@@ -100,54 +130,57 @@ console.log(event.target.innerHTML)
   setUrl() {
     var url = prompt('Enter a URL:', 'http://');
     var selectedText = document.getSelection();
-    document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank" title="'+url+'">' + selectedText + '</a>');
+    document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank" title="' + url + '">' + selectedText + '</a>');
   }
 
-  async getAllUploadContetnt(){
+  async getAllUploadContetnt() {
     this.uploadLoader = true;
-    let { userId } = this._authService.getUser();
-    let response = await this._editorService.getUploadFiles(userId)
-    if(response){
+    let { id } = this._authService.getUser();
+    let response = await this._editorService.getUploadFiles(id)
+    if (response) {
       let data = response['data']
+      this.uploadedContent = [];
       data.forEach(x => {
-        let file = {filePath:'', fileName:''};
+        let file = { filePath: '', fileName: '' };
         file.filePath = x.filePath;
         file.fileName = x.fileName;
         this.uploadedContent.unshift(file)
-      });     
+      });
       this.uploadLoader = false;
-    }    
     }
+  }
 
-  async uploadFile(file){
-    if(file[0]){
-      let { userId } = this._authService.getUser();
-      let response = await this._editorService.uploadFiles(userId, file[0]);
-      if(response){
-        let file = {filePath:response['data']['filePath'], fileName:response['data']['fileName']};
+  async uploadFile(file) {
+    if (file[0]) {
+      let response = await this._editorService.uploadFiles(file[0]);
+      if (response) {
+        let file = { filePath: response['data']['filePath'], fileName: response['data']['fileName'] };
         this.uploadedContent.unshift(file);
       }
     }
-    
   }
 
-  selectCoverImage(file){
-    if(file[0]){
-      this.selectedCoverImage = file[0] 
+  selectCoverImage(file) {
+    if (file[0]) {
+      this.selectedCoverImage = file[0]
     }
   }
 
-    selectImage(file){
-      if(this.selectedImage && this.selectedImage.filePath === file.filePath){
-        this.selectedImage = null;
-        return;
-      }
-      this.selectedImage = file;
+  selectImage(file) {
+    if (this.selectedImage && this.selectedImage.filePath === file.filePath) {
+      this.selectedImage = null;
+      return;
     }
+    this.selectedImage = file;
+  }
 
-    deleteFile(file){
-      console.log(this.selectedImage)
-    }
+  deleteFile(file) {
+    console.log(this.selectedImage)
+  }
+
+  publish(){
 
   }
+
+}
 

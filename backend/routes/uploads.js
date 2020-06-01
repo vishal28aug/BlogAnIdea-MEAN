@@ -4,7 +4,7 @@ const multer = require('multer');
 const { upload, getAllUpload } = require('../controllers/uploads');
 const router = express.Router();
 
-const { protect } = require('../middleware/auth');
+const {protect, authorize} = require('../middleware/auth');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -17,10 +17,10 @@ const storage = multer.diskStorage({
 });
 
 router.route('/')
-  .get(getAllUpload);
+  .get(protect,authorize('user','admin'),getAllUpload);
 
 router.route('/')
-  .post(multer({ storage: storage }).single("fileData"), upload);
+  .post(protect,authorize('user','admin'),multer({ storage: storage }).single("fileData"), upload);
 
 
 

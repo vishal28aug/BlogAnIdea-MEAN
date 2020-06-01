@@ -14,7 +14,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     else if(req.cookies.token){
         token = req.cookies.token
     }
-
+    
     //Make sure token exits
     if(!token) return next(new ErrorResponse('Not authorized to access this route', 401));
 
@@ -22,7 +22,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
         //Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        req.user = await User.findById(decoded.id);
+        req.user = await User.findOne({id:decoded.id});
 
         next()
     }catch(err){

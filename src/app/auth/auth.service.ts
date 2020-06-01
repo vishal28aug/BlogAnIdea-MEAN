@@ -26,6 +26,15 @@ export class AuthService {
     return this.token;
   }
 
+  //Returns header for Authorization
+  getAuthHeader() {
+    return this.getToken()
+      ? new HttpHeaders({
+        'Authorization': 'Bearer ' + this.getToken()
+      })
+      : null
+  }
+
   //return boolean if user is logged in or not
   getIsAuth() {
     return this.isAuthenticated;
@@ -96,6 +105,7 @@ export class AuthService {
     if (userData?.token) {
       this.loggedUser = JSON.parse(userData.loggedUser);
       this.isAuthenticated = true;
+      this.token = userData.token;
       this.authStatusListener.next(true);
     }
   }

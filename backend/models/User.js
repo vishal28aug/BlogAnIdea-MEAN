@@ -4,6 +4,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const UserSchema = new mongoose.Schema({
+    id:{
+        type:String,
+        required:[true, 'Please enter id']
+    },
     firstName: {
         type: String,
         required: [true, 'Please enter name']
@@ -13,8 +17,18 @@ const UserSchema = new mongoose.Schema({
         required: [true, 'Please enter name']
     },
     userId: {
-        type: String,
-        required: [true, 'Please enter a email or mobile number']
+        type:String,
+        required:[true,'Please enter email'],
+        unique: true,
+        match:[
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            'please add a valid email'
+        ]
+    },
+    role:{
+        type:String,
+        enum:['user','publisher','admin'],
+        default:'user'
     },
     password: {
         type: String,
@@ -45,7 +59,7 @@ UserSchema.pre('save',async function(next){
 
 //Sign JWT and return
 UserSchema.methods.getSignedJwtToken = function() {
-    return jwt.sign({id: this._id}, process.env.JWT_SECRET,{
+    return jwt.sign({id: this.id}, process.env.JWT_SECRET,{
         expiresIn: process.env.JWT_EXPIRE
     })
 }

@@ -10,7 +10,7 @@ import {
   @Directive({
     selector: '[imageUpload]'
   })
-  export class DndDirective {
+  export class ImageUploadDirective {
     @HostBinding('class.fileover') fileOver: boolean;
     @Output() fileDropped = new EventEmitter<any>();
   

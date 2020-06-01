@@ -1,102 +1,97 @@
-
 <div class="editor">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light editor-nav-bar">
-      <a href="javascript:void(0)" (click)="format('bold')"><span
-          class="fa fa-bold editor-header-icons clickable"></span></a>
-      <a href="javascript:void(0)" (click)="format('italic')"><span
-          class="fa fa-italic editor-header-icons clickable"></span></a>
-      <a href="javascript:void(0)" (click)="format('underline')"><span
-          class="fa fa-underline editor-header-icons clickable"></span></a>
-      <a href="javascript:void(0)" (click)="format('strikethrough')"><span
-          class="fa fa-strikethrough editor-header-icons clickable"></span></a>
-      <a href="javascript:void(0)" (click)="format('insertunorderedlist')"><span
-          class="fa fa-list-ul editor-header-icons clickable"></span></a>
-      <a href="javascript:void(0)" (click)="format('insertorderedlist')"><span
-          class="fa fa-list-ol editor-header-icons clickable"></span></a>
-          
-  
-  
-      <div class="dropdown editor-header-icons">
-        <span class="btn btn-default dropdown-toggle fa fa-{{selectedJustify.icon}}" id="dropdownMenuButton" type="button"
-          title="Select Log-Level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        </span>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li *ngFor="let justify of justifys; let i = index"><a href="javascript: void(0);"
-              (click)="format(justify.value)" class="dropdown-item fa fa-{{justify.icon}}"></a></li>
-        </ul>
-      </div>
-  
-      <div class="dropdown ">
-        <span class="btn btn-default dropdown-toggle" id="dropdownMenuButton" type="button" title="Select Log-Level"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{selectedFont}}
-        </span>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li *ngFor="let font of fontNames; let i = index"><a href="javascript: void(0);"
-          (click)="format('fontName',font.name)" class="dropdown-item" style="font-family:{{font.name}}">{{font.name}}</a></li>
-        </ul>
-      </div>
-  
-  
-      <div class="dropdown ">
-        <span class="btn btn-default dropdown-toggle" id="dropdownMenuButton" type="button" title="Select Log-Level"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{selectedFontSize.name}}
-        </span>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li *ngFor="let fontSize of fontSizes; let i = index"><a href="javascript: void(0);"
-              (click)="format('fontSize',fontSize)" class="dropdown-item">{{fontSize.name}}</a></li>
-        </ul>
-      </div>
-  
-      <a href="javascript:void(0)" (click)="setUrl()"><span
-          class="fa fa-link editor-header-icons clickable"></span></a>
-  
-          
-      <a href="javascript:void(0)" (click)="getAllUploadContetnt()" data-toggle="modal" 
-      data-target="#uploadModal"><span
-          class="fa fa-picture-o editor-header-icons clickable"></span></a>
-  
-  
-      <a href="javascript:void(0)" (click)="format('bold')"><span
-          class="fa fa-undo editor-header-icons clickable"></span></a>
-      <a href="javascript:void(0)" (click)="format('bold')"><span
-          class="fa fa-repeat editor-header-icons clickable"></span></a>
-    </nav>    
+  <nav class="navbar navbar-expand-lg navbar-light bg-light editor-nav-bar">
+    <a href="javascript:void(0)" (click)="format('bold'); isBold = !isBold;"><span
+        class="fa fa-bold editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isBold}"></span></a>
+    <a href="javascript:void(0)" (click)="format('italic');  isItalic = !isItalic;" ><span
+        class="fa fa-italic editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isItalic}"></span></a>
+    <a href="javascript:void(0)" (click)="format('underline');  isUnderline = !isUnderline;"><span
+        class="fa fa-underline editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isUnderline}"></span></a>
+    <a href="javascript:void(0)" (click)="format('strikethrough');  isStrikeThrough = !isStrikeThrough;"><span
+        class="fa fa-strikethrough editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isStrikeThrough}"></span></a>
+    <a href="javascript:void(0)" (click)="format('insertunorderedlist'); isUl = !isUl;"><span
+        class="fa fa-list-ul editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isUl}"></span></a>
+    <a href="javascript:void(0)" (click)="format('insertorderedlist'); isOl = !isOl;"><span
+        class="fa fa-list-ol editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isOl}"></span></a>
 
-    <div class="cover-image-container">
-    <div *ngIf="isShowAddCoverImage" class="cover-image clickable" (click)="coverPicekr.click()" >
-      <img src="/assets/img/cover-image.png"  class="cover-image__img">        
-      <input accept="image/*" type="file" #coverPicekr (change)="selectCoverImage($event.target.files)">
-     <i class="fa fa-times cover-image__close clickable" aria-hidden="true" (click)="isShowAddCoverImage = false"></i>
+    <div class="dropdown editor-header-icons">
+      <span class="btn btn-default dropdown-toggle fa fa-{{selectedJustify.icon}}" id="dropdownMenuButton" type="button"
+        title="Select Log-Level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      </span>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li *ngFor="let justify of justifys; let i = index"><a href="javascript: void(0);"
+            (click)="format(justify.value)" class="dropdown-item fa fa-{{justify.icon}}"></a></li>
+      </ul>
     </div>
-    <div  *ngIf="!isShowAddCoverImage" class="cover-image--disabled"> 
+
+    <div class="dropdown ">
+      <span class="btn btn-default dropdown-toggle" id="dropdownMenuButton" type="button" title="Select Log-Level"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{selectedFont}}
+      </span>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li *ngFor="let font of fontNames; let i = index"><a href="javascript: void(0);"
+            (click)="format('fontName',font.name)" class="dropdown-item"
+            style="font-family:{{font.name}}">{{font.name}}</a></li>
+      </ul>
+    </div>
+
+    <div class="dropdown ">
+      <span class="btn btn-default dropdown-toggle" id="dropdownMenuButton" type="button" title="Select Log-Level"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{selectedFontSize.name}}
+      </span>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li *ngFor="let fontSize of fontSizes; let i = index"><a href="javascript: void(0);"
+            (click)="format('fontSize',fontSize)" class="dropdown-item">{{fontSize.name}}</a></li>
+      </ul>
+    </div>
+
+    <a href="javascript:void(0)" (click)="setUrl()"><span class="fa fa-link editor-header-icons clickable"></span></a>
+
+    <a href="javascript:void(0)" (click)="getAllUploadContetnt()" data-toggle="modal" data-target="#uploadModal"><span
+        class="fa fa-picture-o editor-header-icons clickable"></span></a>
+
+    <a href="javascript:void(0)" (click)="format('bold')"><span
+        class="fa fa-undo editor-header-icons clickable"></span></a>
+    <a href="javascript:void(0)" (click)="format('bold')"><span
+        class="fa fa-repeat editor-header-icons clickable"></span></a>
+
+        <div class="publish">
+          <button type="button" class="btn btn-primary btn-sm" (click)="publish()">Publish</button>
+          </div>
+  </nav>
+
+  <div class="cover-image-container">
+    <div *ngIf="isShowAddCoverImage" class="cover-image clickable" (click)="coverPicekr.click()">
+      <img src="/assets/img/cover-image.png" class="cover-image__img">
+      <input accept="image/*" type="file" #coverPicekr (change)="selectCoverImage($event.target.files)">
+      <i class="fa fa-times cover-image__close clickable" aria-hidden="true" (click)="isShowAddCoverImage = false"></i>
+    </div>
+    <div *ngIf="!isShowAddCoverImage" class="cover-image--disabled">
       <button (click)="isShowAddCoverImage = true" type="button" class="btn btn-light btn-sm cover-image--enable-btn">
         <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
         Add Cover image
       </button>
-      </div>
-
-
+    </div>
 
     <textarea rows="1" placeholder="Title" maxlength="200" class="editor-title"></textarea>
 
-    <div id="textArea"  [textContent]="content" (input)="editor($event)" placeholder="Write here..." class="editor-textArea" contenteditable="true">
+    <div id="textArea" [textContent]="content" (input)="editor($event)" placeholder="Write here..."
+      class="editor-textArea" contenteditable="true">
     </div>
     {{content}}
   </div>
-  
-  
-  
+
   <!-- Modal -->
-  <div class="modal fade bd-example-modal-lg" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg" id="uploadModal" tabindex="-1" role="dialog"
+    aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
-        
+
         <div class="upload-container clickable" imageUpload (fileDropped)="uploadFile($event)">
-          <input type="file" #fileDropRef id="fileDropRef" 
-          (change)="uploadFile($event.target.files)" class="upload-container-input"/>
-          <i class="fa fa-upload upload-container-i" aria-hidden="true"></i>        
+          <input type="file" #fileDropRef id="fileDropRef" (change)="uploadFile($event.target.files)"
+            class="upload-container-input" />
+          <i class="fa fa-upload upload-container-i" aria-hidden="true"></i>
           <h3 class="upload-container-h3">Drag and drop file here</h3>
           <h3>or</h3>
           <label class="upload-container-label" for="fileDropRef">Browse for file</label>
@@ -106,22 +101,23 @@
           <h3>Recent Uploads</h3>
           <div class="uploads-wrap">
             <div class="uploads-wrap-copy clickable" *ngFor="let file of uploadedContent" (click)="selectImage(file)">
-            <img [src]=file.filePath class="uploads-img" >
-            <div class="uploads-tools" [ngClass]="{'selected-image': file.filePath === selectedImage?.filePath }">
-            <small >{{file.fileName}}</small>
-            <i class="fa fa-check-circle uploads-select-icon"  
-            [ngStyle]="{'color': ( file.filePath === selectedImage?.filePath ) ? '#5cacff' : 'black'}" aria-hidden="true"></i>
-            <i class="fa fa-trash uploads-delete-icon" aria-hidden="true" (click)="deleteFile(file)"></i>
+              <img [src]=file.filePath class="uploads-img">
+              <div class="uploads-tools" [ngClass]="{'selected-image': file.filePath === selectedImage?.filePath }">
+                <small>{{file.fileName}}</small>
+                <i class="fa fa-check-circle uploads-select-icon"
+                  [ngStyle]="{'color': ( file.filePath === selectedImage?.filePath ) ? '#5cacff' : 'black'}"
+                  aria-hidden="true"></i>
+                <i class="fa fa-trash uploads-delete-icon" aria-hidden="true" (click)="deleteFile(file)"></i>
+              </div>
             </div>
-            </div>
-          </div>          
-      </div>
-      <div class="upload-footer">
-        <button *ngIf="selectedImage" type="button" class="btn btn-primary">Insert</button>
-        <button type="button" data-dismiss="modal" class="btn btn-light">Close</button>
-      </div>
-      <div class="modal">
+          </div>
+        </div>
+        <div class="upload-footer">
+          <button *ngIf="selectedImage" type="button" class="btn btn-primary">Insert</button>
+          <button type="button" data-dismiss="modal" class="btn btn-light">Close</button>
+        </div>
+        <div class="modal">
 
         </div>
+      </div>
     </div>
-  </div>

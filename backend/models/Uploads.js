@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const UploadSchema = new mongoose.Schema({
-  userId: {
+  user: {
     type: String,
     required: [true, 'User Id is missing']
   },

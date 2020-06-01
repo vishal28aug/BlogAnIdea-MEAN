@@ -1,4 +1,6 @@
 const crypto = require('crypto');
+const { v4: uuidv4 } = require('uuid');
+
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 const sendEmail = require('../utils/sendEmail');
@@ -12,9 +14,11 @@ exports.register = asyncHandler(async (req, res, next) => {
   const url = req.protocol + '://'+req.get("host");
   profilePicturePath = url +"/images/"+ req.file.filename;
   const { firstName, lastName, userId, password } = req.body;
+  const id = uuidv4();
 
   //Create user
   const user = await User.create({
+    id,
     firstName,
     lastName,
     userId,
@@ -57,7 +61,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @route POST /api/v1/auth/me
 // @acess Private
 exports.getMe = asyncHandler(async (req, res, next) =>{
-  const user = await User.findById(req.user.id);
+  const user = await User.findOne({id:req.user.id});
 
   res.status(200).json({
     sucess: true,
@@ -209,7 +213,7 @@ const sendTokenResponse = (user, statusCode, res) => {
 
   res
     .status(statusCode)
-    .cookie('token', token, options)
+    //.cookie('token', token, options)
     .json({
       sucess: true,
       token

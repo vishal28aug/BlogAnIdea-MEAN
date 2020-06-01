@@ -6,6 +6,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import {AuthInterceptor} from './auth/auth-interceptor'
 
+import {ImageUploadDirective} from './editor/image-upload.directive'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth//login/login.component';
@@ -23,7 +25,8 @@ import { AddBlogButtonComponent } from './utils/add-blog-button/add-blog-button.
     EditorComponent,
     HeaderComponent,
     BlogsComponent,
-    AddBlogButtonComponent
+    AddBlogButtonComponent,
+    ImageUploadDirective
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { AddBlogButtonComponent } from './utils/add-blog-button/add-blog-button.
     ReactiveFormsModule,
     HttpClientModule
   ],
+  exports:[ImageUploadDirective],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
     AuthService

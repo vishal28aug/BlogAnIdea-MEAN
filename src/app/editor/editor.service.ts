@@ -11,19 +11,18 @@ export class EditorService {
 
   constructor(private _http: HttpClient, private _router: Router) { }
 
-  uploadFiles(userId, fileData) {
+  uploadFiles(fileData) {
     const uploadData = new FormData();
-    uploadData.append("userId",userId);
     uploadData.append("fileData",fileData);
     return this._http.post("http://localhost:3000/api/v1/upload/file", uploadData).toPromise();
 
   }
 
-  getUploadFiles( userId ){
+  getUploadFiles( user ){
     return this._http.get("http://localhost:3000/api/v1/upload/file", 
     {params:
       {
-        userId:userId
+        user:user
       }
     }).toPromise();
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EditorService } from './editor.service';
-import { AuthService } from '../auth/auth.service'
+import { EditorService } from '../utils/services/editor.service';
+import { AuthService } from '../utils/services/auth.service'
 import { FormBuilder, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 

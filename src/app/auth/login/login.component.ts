@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../utils/services/auth.service';
 
 @Component({
   selector: 'login',

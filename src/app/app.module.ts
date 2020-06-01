@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AuthService } from './auth/auth.service';
-import {AuthInterceptor} from './auth/auth-interceptor'
+import { AuthService } from './utils/services/auth.service';
+import {AuthInterceptor} from './utils/auth-interceptor'
 
-import {ImageUploadDirective} from './editor/image-upload.directive'
+import {ImageUploadDirective} from './utils/directives/image-upload.directive'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

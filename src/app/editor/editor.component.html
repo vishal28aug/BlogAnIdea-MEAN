@@ -1,13 +1,16 @@
 <div class="editor">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light editor-nav-bar">
+  <div class="editor-nav-bar">
     <a href="javascript:void(0)" (click)="format('bold'); isBold = !isBold;"><span
         class="fa fa-bold editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isBold}"></span></a>
-    <a href="javascript:void(0)" (click)="format('italic');  isItalic = !isItalic;" ><span
-        class="fa fa-italic editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isItalic}"></span></a>
+    <a href="javascript:void(0)" (click)="format('italic');  isItalic = !isItalic;"><span
+        class="fa fa-italic editor-header-icons clickable"
+        [ngClass]="{'editor-header-active-icon': isItalic}"></span></a>
     <a href="javascript:void(0)" (click)="format('underline');  isUnderline = !isUnderline;"><span
-        class="fa fa-underline editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isUnderline}"></span></a>
+        class="fa fa-underline editor-header-icons clickable"
+        [ngClass]="{'editor-header-active-icon': isUnderline}"></span></a>
     <a href="javascript:void(0)" (click)="format('strikethrough');  isStrikeThrough = !isStrikeThrough;"><span
-        class="fa fa-strikethrough editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isStrikeThrough}"></span></a>
+        class="fa fa-strikethrough editor-header-icons clickable"
+        [ngClass]="{'editor-header-active-icon': isStrikeThrough}"></span></a>
     <a href="javascript:void(0)" (click)="format('insertunorderedlist'); isUl = !isUl;"><span
         class="fa fa-list-ul editor-header-icons clickable" [ngClass]="{'editor-header-active-icon': isUl}"></span></a>
     <a href="javascript:void(0)" (click)="format('insertorderedlist'); isOl = !isOl;"><span
@@ -56,28 +59,32 @@
     <a href="javascript:void(0)" (click)="format('bold')"><span
         class="fa fa-repeat editor-header-icons clickable"></span></a>
 
-        <div class="publish">
-          <button type="button" class="btn btn-primary btn-sm" (click)="publish()">Publish</button>
-          </div>
-  </nav>
+    <div class="publish">
+      <button type="button" class="btn btn-primary btn-sm" (click)="publish()">Publish</button>
+    </div>
+  </div>
 
-  <div class="cover-image-container">
-    <div *ngIf="isShowAddCoverImage" class="cover-image clickable" (click)="coverPicekr.click()">
+  <div class="cover-image-container" [formGroup]="form">
+    <div *ngIf="isShowAddCoverImage && !form.value.coverImagePath" class="cover-image clickable" (click)="coverPicekr.click()">
       <img src="/assets/img/cover-image.png" class="cover-image__img">
       <input accept="image/*" type="file" #coverPicekr (change)="selectCoverImage($event.target.files)">
       <i class="fa fa-times cover-image__close clickable" aria-hidden="true" (click)="isShowAddCoverImage = false"></i>
     </div>
-    <div *ngIf="!isShowAddCoverImage" class="cover-image--disabled">
+    <div *ngIf="!isShowAddCoverImage && !form.value.coverImagePath" class="cover-image--disabled">
       <button (click)="isShowAddCoverImage = true" type="button" class="btn btn-light btn-sm cover-image--enable-btn">
         <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
         Add Cover image
       </button>
     </div>
+    <div *ngIf="form.value.coverImagePath"  class="cover-image cover-image-picture clickable">
+      <img [src]="form.value.coverImagePath" class="cover-image__img" style="max-height:450px; width: 100%;">
+      <i class="fa fa-times cover-image__close clickable" aria-hidden="true" (click)="isShowAddCoverImage = false; selectedCoverImage = null"></i>
+    </div>
 
-    <textarea rows="1" placeholder="Title" maxlength="200" class="editor-title"></textarea>
+    <textarea formControlName="blogTitle" rows="1" placeholder="Title" maxlength="200" class="editor-title"></textarea>
 
-    <div id="textArea" [textContent]="content" (input)="editor($event)" placeholder="Write here..."
-      class="editor-textArea" contenteditable="true">
+    <div id="textArea" [textContent]="content" placeholder="Write here..."
+      class="editor-textArea" contenteditable="true" (blur)="saveContent($event)">
     </div>
     {{content}}
   </div>

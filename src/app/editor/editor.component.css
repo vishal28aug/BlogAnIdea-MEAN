@@ -3,6 +3,14 @@
 .editor-nav-bar {
   z-index: 3;
   box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  background-color: #f8f9fa;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  padding: .5rem 1rem;
 }
 
 .editor-header-icons {
@@ -30,6 +38,10 @@
   right: 10px;
 }
 
+.cover-image-container{
+  padding-top: 52px;
+}
+
 .cover-image {
   background-color: #f3f6f8;
   border-bottom: 1px solid #e1e9ee;
@@ -37,6 +49,11 @@
   position: relative;
   text-align: center;
   transition: 334ms height ease;
+}
+
+.cover-image-picture {
+  height: auto;
+  max-height: 450px;
 }
 
 .cover-image__img {
@@ -98,9 +115,9 @@ input[type="file"] {
 }
 
 .editor-textArea {
-  height: 500px;
+  min-height: 390px;
   border: 1px solid;
-  border-color: #a8a8a82d !important;
+  border-color: #a8a8a88a !important;
   padding: 0px 15px;
 }
 

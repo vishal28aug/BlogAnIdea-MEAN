@@ -18,9 +18,7 @@ export class EditorComponent implements OnInit {
 
   selectedJustify;
 
-  selectedFont;
-
-  
+  selectedFont;  
 
   uploadedContent = [];
 
@@ -84,20 +82,21 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.selectedFontSize = this.fontSizes[1];
     this.selectedJustify = this.justifys[1];
-    this.selectedFont = this.fontNames[1].name;
-    
+    this.selectedFont = this.fontNames[1].name;    
     }
 
     ngAfterContentInit(){
     this.form =  this._formBuilder.group({
         coverImagePath: ['', [Validators.required]],
-        title: ['', [Validators.required]],
-        content: ['', [Validators.required]],
+        blogTitle: ['', [Validators.required]],
+        blogContent: ['', [Validators.required]],
     })
     }
 
-    editor(event) {
-
+    saveContent(event) {
+      let blogContent = event.target.innerHTML;
+      this.form.patchValue({ blogContent });
+      this.form.markAsDirty();
     }
 
   format(command, value = null) {
@@ -108,7 +107,6 @@ export class EditorComponent implements OnInit {
         value = value.id;
         break;
       }
-
       case 'JustifyFull':
       case 'JustifyLeft':
       case 'JustifyCenter':
@@ -116,15 +114,12 @@ export class EditorComponent implements OnInit {
         this.selectedJustify = this.justifys.find(x => x.value === command);
         break;
       }
-
       case 'fontName': {
         this.selectedFont = value;
         break;
       }
     }
-
     document.execCommand(command, false, value);
-
   }
 
   setUrl() {
@@ -160,9 +155,15 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  selectCoverImage(file) {
+  async selectCoverImage(file) {
     if (file[0]) {
-      this.selectedCoverImage = file[0]
+      let response = await this._editorService.uploadFiles(file[0]);
+      if (response) {
+        let file = { filePath: response['data']['filePath'], fileName: response['data']['fileName'] };
+        let coverImagePath = file.filePath;
+        this.form.patchValue({ coverImagePath });
+        this.form.markAsDirty();
+      }      
     }
   }
 
@@ -178,8 +179,8 @@ export class EditorComponent implements OnInit {
     console.log(this.selectedImage)
   }
 
-  publish(){
-
+  async publish(){
+    let response = await this._editorService.publishBlog(this.form.value);
   }
 
 }

@@ -16,6 +16,8 @@ import { EditorComponent } from './editor/editor.component';
 import { HeaderComponent } from './utils/header/header.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { AddBlogButtonComponent } from './utils/add-blog-button/add-blog-button.component';
+import { MyblogsComponent } from './blogs/myblogs/myblogs.component';
+import { BlogComponent } from './blogs/blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AddBlogButtonComponent } from './utils/add-blog-button/add-blog-button.
     HeaderComponent,
     BlogsComponent,
     AddBlogButtonComponent,
-    ImageUploadDirective
+    ImageUploadDirective,
+    MyblogsComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,

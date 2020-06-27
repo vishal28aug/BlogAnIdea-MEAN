@@ -23,6 +23,7 @@ connectDB();
 const auth = require('./backend/routes/auth');
 const users = require('./backend/routes/user');
 const upload = require('./backend/routes/uploads');
+const blogs = require('./backend/routes/blogs');
 
 const app = express();
 const router = express.Router();
@@ -83,6 +84,7 @@ app.use("/uploads", express.static(path.join("backend/uploads")));
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/auth/users',users);
 app.use('/api/v1/upload/file',upload);
+app.use('/api/v1/blog', blogs);
 
 const PORT = process.env.PORT || 5000;
 

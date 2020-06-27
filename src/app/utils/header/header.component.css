@@ -3,6 +3,10 @@
     flex-grow: 1;
     color: white;
     justify-content: normal;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 .navbar-nav{
@@ -29,6 +33,16 @@
     margin-right: 5px;
   }
 
-  a {
+ .header a {
     color: white;
+}
+
+.dropdown-item{
+    color: #212529 !important;
+}
+
+.dropdown-item:hover {
+    color: #fff !important;
+    text-decoration: none;
+    background-color: #007bff;
 }

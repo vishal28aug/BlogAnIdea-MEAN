@@ -3,6 +3,7 @@ body {
     color: #525f7f !important;
     height: 100%;
     width: 100%;
+    padding-top: 52px;
 }
 
 .clickable {

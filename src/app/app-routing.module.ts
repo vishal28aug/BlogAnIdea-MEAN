@@ -6,6 +6,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { AuthGuard } from './auth/auth-guard';
 import { EditorComponent } from './editor/editor.component';
+import { BlogComponent } from './blogs/blog/blog.component';
+import { MyblogsComponent } from './blogs/myblogs/myblogs.component';
 
 
 const routes: Routes = [
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: 'register', component: SignUpComponent },
   { path: 'blogs', component: BlogsComponent },
   { path: 'create', component:EditorComponent},
-  { path: 'myblogs', component:BlogsComponent},
+  { path: 'myblogs', component:BlogComponent},
+  { path: 'blogs/:id', component:MyblogsComponent},
   { path: '**', redirectTo: '/blogs' }
 ];
 

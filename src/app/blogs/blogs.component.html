@@ -1,1 +1,17 @@
-<p>blogs works!</p>
+<div class="blogs">
+    <article *ngFor="let blog of blogs; let i = index;" class="blog clickable">
+        <div>
+            <div class="blog-shared-user">
+                <img  *ngIf="blog.coverImagePath != ''" [src]="blog.coverImagePath" alt="Avatar" class="blog-shared-user__avatar">
+                <div class="blog-shared-user__meta">
+                    <span class="blog-shared-user__name">Vishal Sharma</span>
+                    <span class="blog-shared-user__description">Description</span>
+                </div>
+            </div>
+            <img *ngIf="blog.coverImagePath != ''" class="blog-img" [src]="blog.coverImagePath">
+            <div class="blog-title">{{blog.blogTitle}}</div>
+            <div class="blog-subtitle">Subtitle</div>
+            <p>{{blog.createdAt}}</p>
+        </div>
+    </article>
+</div>

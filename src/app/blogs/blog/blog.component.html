@@ -1,1 +1,24 @@
-<p>blog works!</p>
+<div class="blog-container">
+  <article class="blog">
+    <div *ngIf="blog">
+      <div class="blog-shared-user">
+        <img *ngIf="blog.coverImagePath != ''" [src]="blog.coverImagePath" alt="Avatar"
+          class="blog-shared-user__avatar">
+        <div class="blog-shared-user__meta">
+          <span class="blog-shared-user__name">Vishal Sharma</span>
+          <span class="blog-shared-user__description">Description</span>
+        </div>
+      </div>
+      <div class="blog-title">{{blog.blogTitle}}</div>
+      <img *ngIf="blog.coverImagePath != ''" class="blog-img" [src]="blog.coverImagePath">
+      <div class="blog-content" id="singleBlogContent" innerHTML="{{blog.blogContent}}"></div>
+      <p class="blog-created">{{blog.createdAt}}</p>
+    </div>
+  </article>
+  <div class="create-stats">
+    <span class="create-stats-option clickable"> <i class="fa fa-thumbs-up create-stats-icon" aria-hidden="true"></i>Like</span>
+    <span class="create-stats-option clickable"><i class="fa fa-comment create-stats-icon" aria-hidden="true"></i>Comment</span>
+     <span class="create-stats-option clickable"><i class="fa fa-share create-stats-icon" aria-hidden="true"></i>Share</span>
+
+ </div>
+</div>

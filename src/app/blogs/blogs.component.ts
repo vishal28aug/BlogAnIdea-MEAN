@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { EditorService } from '../utils/services/editor.service'
 
@@ -9,7 +10,8 @@ import { EditorService } from '../utils/services/editor.service'
 })
 export class BlogsComponent implements OnInit {
 
-  constructor(private _editorService: EditorService) { }
+  constructor(private _editorService: EditorService,
+    private _router:Router) { }
 
   blogs = [];
   ngOnInit() {
@@ -21,6 +23,10 @@ export class BlogsComponent implements OnInit {
     if(response){
       this.blogs = response['data'];
     }
+  }
+
+  openBlog(id){
+    this._router.navigate(['/blog',id])
   }
 
 }

@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'register', component: SignUpComponent },
   { path: 'blogs', component: BlogsComponent },
   { path: 'create', component:EditorComponent},
-  { path: 'myblogs', component:BlogComponent},
-  { path: 'blogs/:id', component:MyblogsComponent},
+  { path: 'myblogs', component:MyblogsComponent},
+  { path: 'blog/:id', component:BlogComponent},
   { path: '**', redirectTo: '/blogs' }
 ];
 

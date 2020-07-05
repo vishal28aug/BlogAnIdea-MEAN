@@ -31,11 +31,9 @@ export class EditorService {
       }).toPromise();
   }
 
-  publishBlog(blogData) {
-    let response = this._http.post("http://localhost:3000/api/v1/blog", blogData).toPromise();
+  async publishBlog(blogData) {
+    let response = await this._http.post("http://localhost:3000/api/v1/blog", blogData).toPromise();
     if (response['sucess']) {
-      this.myBlogs.push(response['data']);
-      this.blogs.push(response['data']);
       this._router.navigate(['/blog', response['data'].id]);
     }
   }
@@ -43,6 +41,16 @@ export class EditorService {
   async getBlogs(){
     return this._http.get('http://localhost:3000/api/v1/blog').toPromise();
 
+  }
+
+  async getBlog(id){
+    return this._http.get('http://localhost:3000/api/v1/blog',
+    {
+      params:
+      {
+        id: id
+      }
+    }).toPromise();
   }
 
   getMyBlogs(user) {

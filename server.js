@@ -75,6 +75,9 @@ router.get('/register', renderBlogAnIdea);
 router.get('/blogs', renderBlogAnIdea);
 router.get('/create', renderBlogAnIdea);
 router.get('/myblogs', renderBlogAnIdea);
+router.get('/blog/:id', renderBlogAnIdea);
+router.get('/myblogs', renderBlogAnIdea);
+
 
 //images
 app.use("/images", express.static(path.join("backend/images")));

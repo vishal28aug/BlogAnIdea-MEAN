@@ -1,6 +1,6 @@
-<div class="blogs">
-    <article *ngFor="let blog of blogs; let i = index;" class="blog clickable">
-        <div>
+<div class="blogs" *ngFor="let blog of blogs; let i = index;">
+    <article class="blog clickable">
+        <div (click)="openBlog(blog.id)">
             <div class="blog-shared-user">
                 <img  *ngIf="blog.coverImagePath != ''" [src]="blog.coverImagePath" alt="Avatar" class="blog-shared-user__avatar">
                 <div class="blog-shared-user__meta">
@@ -11,7 +11,17 @@
             <img *ngIf="blog.coverImagePath != ''" class="blog-img" [src]="blog.coverImagePath">
             <div class="blog-title">{{blog.blogTitle}}</div>
             <div class="blog-subtitle">Subtitle</div>
-            <p>{{blog.createdAt}}</p>
+            <p class="blog-created">Created:&nbsp;{{blog.createdAt}}</p>
         </div>
     </article>
+    <div class="blog-stats">
+        <div class="stats-count">
+            <i class="fa fa-thumbs-up clickable" aria-hidden="true">&nbsp;12</i>
+            <span class="stats-count-right">&nbsp;
+            <span class="clickable"> 12 Comments</span>
+            <span class="clickable"> 4 Shares</span>
+            </span>
+            </div>
+
+        </div>
 </div>

@@ -1,48 +1,75 @@
-.blogs{
-    width: 60%;
-    padding: 20px;
+.blogs {
+  width: 60%;
+  margin: 20px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, .09);
+
 }
 
-.blog{
-    border: 1px solid rgba(0,0,0,.1);
-    box-shadow: 0 1.5px 3px 0 rgba(0,0,0,.09);
-    border-radius: 2px;
-    overflow: hidden;
-    padding: 10px;
-    margin: 10px;
+.blog {
+  border-radius: 2px;
+  overflow: hidden;
+  padding: 10px;
 }
 
-.blog-shared-user{
-display: flex;
-padding-bottom: 5px;
+.blog-shared-user {
+  display: flex;
+  padding-bottom: 5px;
 }
 
-.blog-shared-user__avatar{
-    vertical-align: middle;
-    width: 43px;
-    height: 43px;
-    border-radius: 50%;
-    margin-right: 5px;
+.blog-shared-user__avatar {
+  vertical-align: middle;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
-.blog-shared-user__meta{
-    display: grid;
+.blog-shared-user__meta {
+  display: grid;
 }
 
-.blog-shared-user__name{
-    font-weight: 500;
+.blog-shared-user__name {
+  font-weight: 500;
 }
 
-.blog-shared-user__description{
-    font-size: 15px;
+.blog-shared-user__description {
+  font-size: 15px;
 }
 
-.blog-img{
-    height: 250px;
-    width: 100%;
+.blog-img {
+  height: 250px;
+  width: 100%;
 }
 
-.blog-title{
-    font-size: 30px;
-    font-weight: 500;
+.blog-title {
+  font-size: 30px;
+  font-weight: 500;
 }
+
+.blog-created{
+    margin-bottom: 0rem;
+}
+
+.blog-stats {
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.stats-count {
+  padding: 5px 10px;
+  border-radius: 2px;
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  font-weight: 500;
+  border-top: 1px solid #ced0d4;
+  margin: 0px 25px;
+
+}
+
+.stats-count-right {
+  margin-left: auto;
+  margin-right: 10px;
+}
+

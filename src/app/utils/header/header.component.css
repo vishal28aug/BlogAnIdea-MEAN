@@ -9,6 +9,17 @@
     z-index: 1000;
 }
 
+.header-logo{
+    height: 43px;
+    width: 60px;
+}
+
+.navbar-brand{
+    font-family: cursive;
+    font-style: italic;
+    font-weight: bold;
+}
+
 .navbar-nav{
     display: flex;
     flex-direction: row;
